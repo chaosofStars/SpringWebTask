@@ -18,12 +18,8 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 public class ShowController {
-    ShowService productService;
-
     @Autowired
-    public ShowController(ShowService productService) {
-        this.productService = productService;
-    }
+    ShowService productService;
 
     @RequestMapping("/show")
     public ModelAndView showView(HttpSession httpSession, ModelMap modelMap, @RequestParam("id") int productId) throws UnsupportedEncodingException {

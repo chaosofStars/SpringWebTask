@@ -14,18 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class IndexService implements WebService {
-    private TransactionTableDao transactionTableDao;
-    private ContentDao contentDao;
-
+public class IndexService extends WebService {
     @Autowired
     public IndexService(TransactionTableDao transactionTableDao, ContentDao contentDao) {
-        super();
-        this.transactionTableDao = transactionTableDao;
-        this.contentDao = contentDao;
+        super(transactionTableDao, contentDao);
     }
 
     public List<Product> listProductByUser(User user) throws UnsupportedEncodingException {
+        TransactionTableDao transactionTableDao = getTransactionTableDao();
         List<Product> products = listProduct();
         if (!products.isEmpty()) {
             for (Product product : products) {
@@ -41,6 +37,7 @@ public class IndexService implements WebService {
     }
 
     public List<Product> listProduct() throws UnsupportedEncodingException {
+        ContentDao contentDao = getContentDao();
         List<Product> products = new ArrayList<Product>();
         List<Content> contents = contentDao.listContents();
         for (Content content : contents) {

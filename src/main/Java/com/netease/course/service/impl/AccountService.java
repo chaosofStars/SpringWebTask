@@ -10,25 +10,21 @@ import com.netease.course.service.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AccountService implements WebService {
-    private TransactionTableDao transactionTableDao;
-    private ContentDao contentDao;
-
+public class AccountService extends WebService {
     @Autowired
     public AccountService(TransactionTableDao transactionTableDao, ContentDao contentDao) {
-        super();
-        this.transactionTableDao = transactionTableDao;
-        this.contentDao = contentDao;
+        super(transactionTableDao, contentDao);
     }
 
     public List<Product> getProductsByUser(User user) throws UnsupportedEncodingException {
+        TransactionTableDao transactionTableDao = getTransactionTableDao();
+        ContentDao contentDao = getContentDao();
+
         List<Product> products = new ArrayList<Product>();
         List<TransactionTable> tables = transactionTableDao.listTables();
         for (TransactionTable table : tables) {

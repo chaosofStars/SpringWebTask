@@ -10,18 +10,15 @@ import java.sql.Date;
 
 
 @Service
-public class BuyService implements WebService{
-    private TransactionTableDao transactionTableDao;
-    private ContentDao contentDao;
-
+public class BuyService extends WebService {
     @Autowired
     public BuyService(TransactionTableDao transactionTableDao, ContentDao contentDao) {
-        super();
-        this.transactionTableDao = transactionTableDao;
-        this.contentDao = contentDao;
+        super(transactionTableDao, contentDao);
     }
 
     public void saveTransaction(Integer productId, Integer num, int userId) {
+        TransactionTableDao transactionTableDao = getTransactionTableDao();
+        ContentDao contentDao = getContentDao();
         Date date = new Date(System.currentTimeMillis());
         float price = contentDao.getContentById(productId).getPrice();
         transactionTableDao.insertTrx(productId,userId,price,date.getTime(),num);

@@ -20,12 +20,8 @@ import java.util.List;
 
 @Controller
 public class AccountController {
-    private AccountService productService;
-
     @Autowired
-    public void setProductService(AccountService productService) {
-        this.productService = productService;
-    }
+    private AccountService productService;
 
     @RequestMapping("/account")
     public ModelAndView acountView(ModelMap modelMap, HttpSession httpSession) throws UnsupportedEncodingException {

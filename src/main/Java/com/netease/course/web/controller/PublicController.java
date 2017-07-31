@@ -15,16 +15,12 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 public class PublicController {
+    @Autowired
     private EditAndPublicService productService;
 
     @ModelAttribute("title")
     private void setTitle(ModelMap modelMap) {
         modelMap.addAttribute("title", "发布");
-    }
-
-    @Autowired
-    public PublicController(EditAndPublicService productService) {
-        this.productService = productService;
     }
 
     @RequestMapping(value = "/public")

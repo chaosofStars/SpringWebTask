@@ -13,18 +13,14 @@ import org.springframework.stereotype.Service;
 import java.io.UnsupportedEncodingException;
 
 @Service
-public class EditAndPublicService implements WebService {
-    private TransactionTableDao transactionTableDao;
-    private ContentDao contentDao;
-
+public class EditAndPublicService extends WebService {
     @Autowired
     public EditAndPublicService(TransactionTableDao transactionTableDao, ContentDao contentDao) {
-        super();
-        this.transactionTableDao = transactionTableDao;
-        this.contentDao = contentDao;
+        super(transactionTableDao, contentDao);
     }
 
     public void updateProduct(EditProduct product) throws UnsupportedEncodingException {
+        ContentDao contentDao = getContentDao();
         int productId = product.getId();
         String title = product.getTitle();
         byte[] image = TransformUtil.toByte(product.getImage());
@@ -37,6 +33,7 @@ public class EditAndPublicService implements WebService {
 
 
     public Product saveProduct(EditProduct product) throws UnsupportedEncodingException {
+        ContentDao contentDao = getContentDao();
         String title = product.getTitle();
         byte[] image = TransformUtil.toByte(product.getImage());
         byte[] detail = TransformUtil.toByte(product.getDetail());
@@ -49,21 +46,5 @@ public class EditAndPublicService implements WebService {
         return product1;
     }
 
-    public Product getProductById(int productId) throws UnsupportedEncodingException {
-        Content content = contentDao.getContentById(productId);
-        Product product = null;
-
-        if (content != null) {
-            String title = content.getTitle();
-            byte[] image = content.getImage();
-            float price = content.getPrice();
-            String summary = content.getSummary();
-            byte[] detail = content.getDetail();
-            product = new Product(productId, title,
-                    image, summary, detail);
-            product.setPrice(price);
-        }
-        return product;
-    }
 
 }

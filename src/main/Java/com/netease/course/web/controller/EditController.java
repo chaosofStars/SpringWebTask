@@ -14,13 +14,8 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 public class EditController {
-
-    private EditAndPublicService productService;
-
     @Autowired
-    public void setProductService(EditAndPublicService productService) {
-        this.productService = productService;
-    }
+    private EditAndPublicService productService;
 
     @RequestMapping("/edit")
     public String editView(@RequestParam("id") int productId, ModelMap modelMap) throws UnsupportedEncodingException {

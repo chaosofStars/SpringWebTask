@@ -15,12 +15,8 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 public class IndexController {
-    IndexService productService;
-
     @Autowired
-    public IndexController(IndexService productService) {
-        this.productService = productService;
-    }
+    IndexService productService;
 
     @RequestMapping(path = {"/index", "/"})
     public ModelAndView indexView(ModelMap modelMap, HttpSession httpSession) throws UnsupportedEncodingException {

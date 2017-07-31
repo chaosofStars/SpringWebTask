@@ -11,36 +11,17 @@ import org.springframework.stereotype.Service;
 import java.io.UnsupportedEncodingException;
 
 @Service
-public class DeleteService implements WebService{
-    private TransactionTableDao transactionTableDao;
-    private ContentDao contentDao;
-
+public class DeleteService extends WebService {
     @Autowired
     public DeleteService(TransactionTableDao transactionTableDao, ContentDao contentDao) {
-        super();
-        this.transactionTableDao = transactionTableDao;
-        this.contentDao = contentDao;
+        super(transactionTableDao, contentDao);
     }
 
 
     public void deleteProduct(Integer productId) {
+        ContentDao contentDao = getContentDao();
         contentDao.deleteContent(productId);
     }
 
-    public Product getProductById(int productId) throws UnsupportedEncodingException {
-        Content content = contentDao.getContentById(productId);
-        Product product = null;
-        if (content != null) {
-            String title = content.getTitle();
-            byte[] image = content.getImage();
-            float price = content.getPrice();
-            String summary = content.getSummary();
-            byte[] detail = content.getDetail();
 
-            product = new Product(productId, title,
-                    image, summary, detail);
-            product.setPrice(price);
-        }
-        return product;
-    }
 }

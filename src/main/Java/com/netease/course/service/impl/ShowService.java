@@ -14,18 +14,16 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Service
-public class ShowService implements WebService {
-    private TransactionTableDao transactionTableDao;
-    private ContentDao contentDao;
+public class ShowService extends WebService {
+
 
     @Autowired
     public ShowService(TransactionTableDao transactionTableDao, ContentDao contentDao) {
-        super();
-        this.transactionTableDao = transactionTableDao;
-        this.contentDao = contentDao;
+        super(transactionTableDao, contentDao);
     }
 
     public Product getProductByUser(Product product, User user) throws UnsupportedEncodingException {
+        TransactionTableDao transactionTableDao = getTransactionTableDao();
         //0为买家，1为卖家
         List<TransactionTable> trxTables = transactionTableDao.getTrxByProductId(product.getId());
         if (!trxTables.isEmpty()) {
@@ -45,19 +43,5 @@ public class ShowService implements WebService {
         return product;
     }
 
-    public Product getProductById(int productId) throws UnsupportedEncodingException {
-        Content content = contentDao.getContentById(productId);
-        Product product = null;
-        if (content != null) {
-            String title = content.getTitle();
-            byte[] image = content.getImage();
-            float price = content.getPrice();
-            String summary = content.getSummary();
-            byte[] detail = content.getDetail();
-            product = new Product(productId, title,
-                    image, summary, detail);
-            product.setPrice(price);
-        }
-        return product;
-    }
+
 }
