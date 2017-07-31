@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <!--静态资源访问配置-->
+    <mvc:default-servlet-handler/>
+
+    <!--启用注解-->
+    <mvc:annotation-driven/>
+
+    <!--组件扫描-->
+    <context:component-scan base-package="com.netease.course.web"/>
+
+
+
+    <!--配置Freemarker路径-->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="template"/>
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="freemarkerSettings">
+            <!-- 设置默认的编码方式 -->
+            <props>
+                <!--解决前端报空指针问题-->
+                <prop key="classic_compatible">true</prop>
+                <prop key="defaultEncoding">utf-8</prop>
+                <prop key="template_exception_handler">rethrow</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--freeMarker视图解析器-->
+    <bean   class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="viewResolvers">
+            <list>
+                <bean id="viewResolver"
+                      class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+                    <property name="cache" value="true" />
+                    <property name="prefix" value="" />
+                    <property name="suffix" value=".ftl" />
+                    <property name="contentType" value="text/html; charset=utf-8" />
+                </bean>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+            </list>
+        </property>
+    </bean>
+
+    <!--multipartResolver配置-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1048576"/>
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="resolveLazily" value="true"/>
+    </bean>
+
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/*"/>
+            <bean class="com.netease.course.web.filter.ApiInterceptors"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/*"/>
+            <bean class="com.netease.course.web.filter.CommonInterceptors"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>
