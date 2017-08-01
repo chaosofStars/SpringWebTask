@@ -5,10 +5,11 @@ import com.netease.course.dao.ContentDao;
 import com.netease.course.dao.TransactionTableDao;
 import com.netease.course.meta.Content;
 import com.netease.course.service.product.Product;
+import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 
-
+@Service
 public abstract class WebService {
     private TransactionTableDao transactionTableDao;
     private ContentDao contentDao;

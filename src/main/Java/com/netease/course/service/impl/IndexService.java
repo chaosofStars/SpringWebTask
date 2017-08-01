@@ -27,7 +27,6 @@ public class IndexService extends WebService {
             for (Product product : products) {
                 int productId = product.getId();
                 if ((!transactionTableDao.getTrxByProductId(productId).isEmpty())) {
-                    System.out.println(transactionTableDao.getTrxByProductId(productId));
                     product.setIsBuy(1);
                     product.setIsSell(1);
                 }

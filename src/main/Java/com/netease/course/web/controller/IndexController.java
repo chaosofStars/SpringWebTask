@@ -18,7 +18,7 @@ public class IndexController {
     @Autowired
     IndexService productService;
 
-    @RequestMapping(path = {"/index", "/"})
+    @RequestMapping({"/index", "/"})
     public ModelAndView indexView(ModelMap modelMap, HttpSession httpSession) throws UnsupportedEncodingException {
         if (httpSession.getAttribute("user") != null) {
             User user = (User) httpSession.getAttribute("user");

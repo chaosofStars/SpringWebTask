@@ -61,16 +61,16 @@
         <property name="resolveLazily" value="true"/>
     </bean>
 
-    <!--&lt;!&ndash;拦截器&ndash;&gt;-->
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/api/*"/>-->
-            <!--<bean class="com.netease.course.web.filter.ApiInterceptors"/>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/*"/>-->
-            <!--<bean class="com.netease.course.web.filter.CommonInterceptors"/>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/*"/>
+            <bean class="com.netease.course.web.filter.ApiInterceptors"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/*"/>
+            <bean class="com.netease.course.web.filter.CommonInterceptors"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>
