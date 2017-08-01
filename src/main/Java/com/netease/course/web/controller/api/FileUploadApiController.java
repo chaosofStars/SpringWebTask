@@ -1,7 +1,7 @@
 package com.netease.course.web.controller.api;
 
 
-import org.apache.commons.io.FileUtils;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.sql.Date;
 
 
 @Controller
@@ -25,15 +25,27 @@ public class FileUploadApiController {
     public ModelMap upload(@RequestParam("file") MultipartFile file, ModelMap modelMap,
                            HttpSession httpSession) throws IOException {
         if (!file.isEmpty()) {
-            String fileName = System.currentTimeMillis() + file.getOriginalFilename();
+
             //获取文件的路径
-            String filePath = httpSession.getServletContext().getRealPath("/") + "image";
-            File copyFile = new File(filePath, fileName);
-            FileUtils.copyInputStreamToFile(file.getInputStream(), copyFile);
+            String filePath = httpSession.getServletContext().getRealPath("\\") + "images";
+            String fileName = new Date(System.currentTimeMillis()).getTime()+ file.getOriginalFilename();
+            System.out.println("fileName:"+ fileName);
+            System.out.println("filePath:"+ filePath);
+
+            File tempFile = new File(filePath, fileName);
+            if (!tempFile.getParentFile().exists()) {
+                tempFile.getParentFile().mkdir();
+            }
+            if (!tempFile.exists()) {
+                tempFile.createNewFile();
+            }
+            file.transferTo(tempFile);
+
             modelMap.addAttribute("code", 200);
             modelMap.addAttribute("message", "success");
-            modelMap.addAttribute("result", "/image/"+fileName);
+            modelMap.addAttribute("result", "\\images\\"+fileName);
         } else {
+            System.out.println(file);
             modelMap.addAttribute("code", 400);
             modelMap.addAttribute("message", "failed");
             modelMap.addAttribute("result", null);
