@@ -27,7 +27,7 @@ public class FileUploadApiController {
         if (!file.isEmpty()) {
 
             //获取文件的路径
-            String filePath = httpSession.getServletContext().getRealPath("\\") + "images";
+            String filePath = httpSession.getServletContext().getRealPath(File.separator) + "images";
             String fileName = new Date(System.currentTimeMillis()).getTime()+ file.getOriginalFilename();
             System.out.println("fileName:"+ fileName);
             System.out.println("filePath:"+ filePath);
@@ -43,7 +43,7 @@ public class FileUploadApiController {
 
             modelMap.addAttribute("code", 200);
             modelMap.addAttribute("message", "success");
-            modelMap.addAttribute("result", "\\images\\"+fileName);
+            modelMap.addAttribute("result", File.separator+"images"+File.separator+fileName);
         } else {
             System.out.println(file);
             modelMap.addAttribute("code", 400);
