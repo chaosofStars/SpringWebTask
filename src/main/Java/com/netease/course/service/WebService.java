@@ -4,13 +4,16 @@ package com.netease.course.service;
 import com.netease.course.dao.ContentDao;
 import com.netease.course.dao.TransactionTableDao;
 import com.netease.course.meta.Content;
-import com.netease.course.service.product.Product;
+import com.netease.course.meta.product.Product;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 
 @Service
 public abstract class WebService {
+    /**
+     * 子类对象的transactionTableDao，contentDao对象均从这里继承
+     */
     private TransactionTableDao transactionTableDao;
     private ContentDao contentDao;
 

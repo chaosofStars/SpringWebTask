@@ -1,10 +1,10 @@
 package com.netease.course.meta;
 
 public class User {
-    int userId;
-    String userName;
-    String password;
-    String nickName;
+    private int userId;
+    private String userName;
+    private String password;
+    private String nickName;
     //0为买家，1为卖家
     int userType;
 

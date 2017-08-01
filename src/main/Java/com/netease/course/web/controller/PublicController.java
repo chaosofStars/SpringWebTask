@@ -1,9 +1,9 @@
 package com.netease.course.web.controller;
 
 
-import com.netease.course.service.impl.EditAndPublicService;
-import com.netease.course.service.product.EditProduct;
-import com.netease.course.service.product.Product;
+import com.netease.course.service.webServiceImpl.EditAndPublicService;
+import com.netease.course.meta.product.EditProduct;
+import com.netease.course.meta.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,7 +30,6 @@ public class PublicController {
 
     @RequestMapping(value = "/publicSubmit", method = RequestMethod.POST)
     public ModelAndView publicSubmit(EditProduct product,ModelMap modelMap) throws UnsupportedEncodingException {
-
         Product product1 = productService.saveProduct(product);
         modelMap.addAttribute("product", product1);
         return new ModelAndView("publicSubmit", modelMap);

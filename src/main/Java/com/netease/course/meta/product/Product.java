@@ -1,10 +1,9 @@
-package com.netease.course.service.product;
+package com.netease.course.meta.product;
 
 
 import com.netease.course.utils.TransformUtil;
 
 import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
 
 public  class Product {
     private int id;

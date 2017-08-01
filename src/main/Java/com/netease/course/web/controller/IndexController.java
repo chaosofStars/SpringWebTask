@@ -2,7 +2,7 @@ package com.netease.course.web.controller;
 
 
 import com.netease.course.meta.User;
-import com.netease.course.service.impl.IndexService;
+import com.netease.course.service.webServiceImpl.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

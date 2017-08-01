@@ -2,7 +2,7 @@ package com.netease.course.web.controller.api;
 
 
 
-import com.netease.course.service.impl.DeleteService;
+import com.netease.course.service.webServiceImpl.DeleteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,9 +28,11 @@ public class DeleteProductApiController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public ModelMap delete(@RequestParam("id") Integer productId, ModelMap modelMap) throws UnsupportedEncodingException {
-
-        if (productService.getProductById(productId)!= null) {
+        //判断商品是否存在
+        if (productService.getProductById(productId) != null) {
+            //删除商品
             productService.deleteProduct(productId);
+            //判断商品是否删除成功
             if (productService.getProductById(productId) == null) {
                 modelMap.addAttribute("code", 200);
                 modelMap.addAttribute("message", "success");

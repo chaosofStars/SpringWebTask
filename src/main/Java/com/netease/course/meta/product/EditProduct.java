@@ -1,4 +1,4 @@
-package com.netease.course.service.product;
+package com.netease.course.meta.product;
 
 public class EditProduct {
     private int id;

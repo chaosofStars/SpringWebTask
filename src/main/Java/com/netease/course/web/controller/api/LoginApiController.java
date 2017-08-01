@@ -24,11 +24,13 @@ public class LoginApiController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public ModelMap login(User user, ModelMap modelMap, HttpSession httpSession) {
+        //判断是否登录
         if (userService.isLogin(user)) {
             modelMap.addAttribute("code", 200);
             modelMap.addAttribute("message", "success");
             modelMap.addAttribute("result", true);
             user = userService.getUserByName(user.getUserName());
+            //登录成功后，创建session
             httpSession.setAttribute("user", user);
         } else {
             modelMap.addAttribute("code", 400);

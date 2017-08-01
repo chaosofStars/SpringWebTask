@@ -1,14 +1,11 @@
 package com.netease.course.meta;
 
-
-import java.sql.Date;
-
 public class TransactionTable {
-    int productId;
-    int userId;
-    float buyPrice;
-    long time;
-    int num;
+    private int productId;
+    private int userId;
+    private float buyPrice;
+    private long time;
+    private int num;
 
     @Override
     public String toString() {

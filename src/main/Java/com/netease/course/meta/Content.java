@@ -3,12 +3,12 @@ package com.netease.course.meta;
 import java.util.Arrays;
 
 public class Content {
-    int productId;
-    String title;
-    String summary;
-    byte[] detail;
-    byte[] image;
-    float price;
+    private int productId;
+    private String title;
+    private String summary;
+    private byte[] detail;
+    private byte[] image;
+    private float price;
 
     @Override
     public String toString() {

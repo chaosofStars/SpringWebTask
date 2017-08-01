@@ -1,4 +1,4 @@
-package com.netease.course.service.impl;
+package com.netease.course.service.webServiceImpl;
 
 import com.netease.course.dao.ContentDao;
 import com.netease.course.dao.TransactionTableDao;

@@ -32,6 +32,7 @@ public class FileUploadApiController {
             System.out.println("fileName:"+ fileName);
             System.out.println("filePath:"+ filePath);
 
+            //把文件转移到images文件夹中
             File tempFile = new File(filePath, fileName);
             if (!tempFile.getParentFile().exists()) {
                 tempFile.getParentFile().mkdir();
@@ -41,6 +42,7 @@ public class FileUploadApiController {
             }
             file.transferTo(tempFile);
 
+            //返回成功响应，添加文件路径
             modelMap.addAttribute("code", 200);
             modelMap.addAttribute("message", "success");
             modelMap.addAttribute("result", File.separator+"images"+File.separator+fileName);
